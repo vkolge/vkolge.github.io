@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishwaraj Kolge | Mechanical Design Engineer</title>
+    <style>
+        /* Base Styles & Corporate Color Palette */
+        :root {
+            --primary-color: #1a252f;
+            --secondary-color: #2c3e50;
+            --accent-color: #3498db;
+            --light-bg: #f4f7f6;
+            --text-color: #333;
+            --success-color: #27ae60;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Top Navigation Bar */
+        nav {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            width: 85%;
+            margin: auto;
+            display: flex;
+            justify-content: center; /* Centered the navigation links */
+            align-items: center;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #bdc3c7;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover, .nav-btn.active {
+            color: #fff;
+            background-color: var(--accent-color);
+        }
+
+        /* Call to Action Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        /* Page Container */
+        .page-content {
+            display: none; 
+            width: 85%;
+            max-width: 1100px;
+            margin: 40px auto;
+            flex-grow: 1;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .page-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header / Profile Area */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+        }
+        .profile-info h1 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+        }
+        .profile-info h3 {
+            margin: 0 0 15px 0;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* Cards & Grids */
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent-color);
+        }
+        h2 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+        }
+        .grid-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #ecf0f1;
+            border-top: 4px solid var(--secondary-color);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .grid-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        /* IMAGE GALLERY STYLES */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+        }
+        .project-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        .image-container:hover .project-img {
+            transform: scale(1.05);
+        }
+        .image-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 37, 47, 0.7);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-weight: bold;
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+        .image-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        /* MODALS (Gallery & Resume) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            padding-top: 50px; 
+            left: 0; top: 0; 
+            width: 100%; height: 100%; 
+            background-color: rgba(0,0,0,0.9); 
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 80%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 3px solid #fff;
+            border-radius: 8px;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        /* Resume Modal Specifics */
+        .resume-modal-content {
+            background-color: #f4f7f6;
+            margin: 0 auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 1000px;
+            border-radius: 8px;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-right: 30px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 15px;
+        }
+        .resume-iframe {
+            width: 100%;
+            height: 75vh;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        @keyframes zoomIn {
+            from {transform: scale(0.8)} 
+            to {transform: scale(1)}
+        }
+        .close {
+            position: absolute;
+            top: 20px; right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close:hover, .close:focus { color: #3498db; }
+        
+        .close-resume {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: #777;
+            font-size: 35px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close-resume:hover { color: #e74c3c; }
+        
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            transition: 0.3s;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .next { right: 0; border-radius: 3px 0 0 3px; }
+        .prev { left: 0; }
+        .prev:hover, .next:hover { background-color: #3498db; }
+        
+        /* Typography & Layout */
+        .grid-card h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+        .tools-used {
+            font-weight: bold;
+            color: var(--accent-color);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .impact-statement {
+            background-color: #e8f6f3;
+            border-left: 4px solid var(--success-color);
+            padding: 10px 15px;
+            margin-top: auto; 
+            font-size: 0.95rem;
+            color: #1e8449;
+            font-weight: 500;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-tag {
+            background: var(--secondary-color);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+        footer a { color: var(--accent-color); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <script>
+        const password = prompt("This portfolio is currently under construction. Please enter the password:");
+        if (password !== "vishwarajportfolio") {
+            document.body.innerHTML = "<div style='text-align:center; padding:15%; font-family:sans-serif; color:#2c3e50;'><h2>🚧 Portfolio Under Construction 🚧</h2><p>Please check back soon!</p></div>";
+            throw new Error("Wrong password. Page stopped loading.");
+        }
+    </script>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-links">
+                <button class="nav-btn active" onclick="openPage(this, 'home')">Home</button>
+                <button class="nav-btn" onclick="openPage(this, 'experience')">Experience</button>
+                <button class="nav-btn" onclick="openPage(this, 'projects')">Projects</button>
+                <button class="nav-btn" onclick="openPage(this, 'certifications')">Certifications</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="home" class="page-content active">
+        <div class="profile-header">
+            <img src="profile.jpg" alt="Vishwaraj Kolge" class="profile-img">
+            <div class="profile-info">
+                <h1>Vishwaraj Pravin Kolge</h1>
+                <h3>Mechanical Design Engineer | MS Mechanical Engineering</h3>
+                <p>I am a multifaceted Design Engineer with a proven track record of bridging the gap between advanced computational theory and high-volume manufacturing. With 5 years of experience in full product lifecycle management, I specialize in driving aggressive cost-down initiatives—having successfully engineered $560K in VA/VE savings and achieved a 96% reduction in defect rates. I deliver elite-level CAD modeling, rigorous FEA/CFD validation, and hands-on rapid prototyping to bring robust, profitable products to market.</p>
+                <div style="margin-top: 15px;">
+                    <strong>Email:</strong> vishukolge@gmail.com | <strong>Phone:</strong> +1-704-756-0205<br>
+                    <strong>Location:</strong> Clarksville, TN | <a href="https://www.linkedin.com/in/vk8/" target="_blank" style="color: var(--accent-color);">LinkedIn Profile</a>
+                    
+                    <br><br>
+                    <button class="btn" onclick="openResumeModal()">View / Download Resume</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Core Competencies</h2>
+            <div class="skills-grid">
+                <span class="skill-tag">GD&T ASME Y14.5</span>
+                <span class="skill-tag">SolidWorks & NX CAD</span>
+                <span class="skill-tag">ANSYS (FEA & CFD)</span>
+                <span class="skill-tag">MATLAB & Python</span>
+                <span class="skill-tag">Thermal Management</span>
+                <span class="skill-tag">Hydraulics & Fluids</span>
+                <span class="skill-tag">VA/VE Analysis</span>
+                <span class="skill-tag">Root Cause Analysis (8D)</span>
+                <span class="skill-tag">Teamcenter PLM & SAP</span>
+                <span class="skill-tag">DFMA & Rapid Prototyping</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="experience" class="page-content">
+        <div class="card">
+            <h2>Professional Experience</h2>
+            
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Design Engineer</h3>
+                <strong>White Drive Motors and Steering</strong> | <em>Apr 2024 - Present | Hopkinsville, KY</em>
+                <ul>
+                    <li>Orchestrated an end-to-end project to insource critical hydraulic motor sub-components due to supplier failures. Managed total lifecycle (CAD/BOM updates, procurement, PPAP, testing), successfully driving 50% cash-flow retention.</li>
+                    <li>Validated rigorous design and supplier changes through controlled testing, enabling a massive 30% reduction in COGS.</li>
+                    <li>Resolved complex hydraulic motor design and field issues, directly boosting quality, reliability, and manufacturability.</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Design Engineer</h3>
+                <strong>T.RAD North America, Inc.</strong> | <em>Apr 2021 - Apr 2024 | Hopkinsville, KY</em>
+                <ul>
+                    <li>Spearheaded aggressive VA/VE initiatives for automotive heat exchangers, achieving $560K in tangible cost savings without compromising product integrity.</li>
+                    <li>Achieved an outstanding 96% reduction in defect rates for stamped metal parts by deploying structured Root Cause problem-solving approaches.</li>
+                    <li>Implemented 56 critical engineering changes under tight deadlines, securing a 98% first-pass approval rate to drastically minimize rework.</li>
+                    <li>Executed advanced FEA and CFD analyses using ANSYS to optimize highly complex thermal systems.</li>
+                </ul>
+            </div>
+            
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Researcher</h3>
+                <strong>UNC Charlotte, Computational Mechanics Lab</strong> | <em>Jul 2020 - Apr 2021 | Charlotte, NC</em>
+                <ul>
+                    <li>Dramatically improved analysis efficiency by generating 100+ ABAQUS FEA models with cohesive elements.</li>
+                    <li>Wrote custom Python scripts to completely automate the modeling process, allowing for rapid generation of unique model variations per run.</li>
+                </ul>
+            </div>
+            
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Product Development Intern</h3>
+                <strong>Enventys Partners</strong> | <em>May 2019 - Aug 2019 | Charlotte, NC</em>
+                <ul>
+                    <li>Coherently worked with Mechanical Engineers to design and develop concept models and prototypes using SolidWorks.</li>
+                    <li>Fabricated components hands-on utilizing SLA 3D Printing, Waterjet Cutting, and Laser Cutting.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="projects" class="page-content">
+        <div class="card">
+            <h2>Engineering Projects</h2>
+            <p>I do not just operate software; I understand the mathematics behind it and the manufacturing processes required to build it. <strong>Click on any project image below to view the detailed image gallery, including CAD models, physical prototypes, and analysis plots.</strong></p>
+        </div>
+        <div class="grid-layout">
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('gokart')">
+                    <img src="gokart1.jpg" alt="Go-Kart Chassis & Assembly" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+gokart1.jpg'">
+                    <div class="image-overlay">Click to View Gallery</div>
+                </div>
+                <h4>High-Performance Go-Kart Chassis & Safety Design</h4>
+                <span class="tools-used">Tools: SolidWorks, ANSYS Workbench, Arc Welding</span>
+                <p>Co-led the chassis engineering department for a competitive racing team. Engineered the complete base frame and bodywork concepts in SolidWorks, validating structural integrity via ANSYS impact analysis. Fabricated the vehicle using hands-on arc welding, lathe, and milling techniques.</p>
+                <p>Designed a proprietary driver safety innovation: a rear-mounted engine fire extinguishing mechanism activated seamlessly by the driver during thermal events.</p>
+                <div class="impact-statement">
+                    <strong>Engineering Impact:</strong> Demonstrated full-cycle automotive design—from CAE simulation to physical welding. Awarded "Best Innovation" and "Best Autocross," securing 2nd Runners-up Nationwide.
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('lcftool')">
+                    <img src="lcftool1.jpg" alt="LCF Tool GUI & Plots" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+lcftool1.jpg'">
+                    <div class="image-overlay">Click to View Gallery</div>
+                </div>
+                <h4>Algorithmic Low Cycle Fatigue (LCF) Evaluation Tool</h4>
+                <span class="tools-used">Tools: Python, MATLAB, ANSYS</span>
+                <p>Bridged the gap between commercial FEA software and specialized programmatic analysis. Developed a custom Python computing architecture to parse ANSYS results and calculate the LCF life of every single node in an FEA simulation.</p>
+                <p>Successfully implemented complex mathematical models including the Coffin-Manson equation, Neuber methods for elastoplastic conversion, and the Newton-Raphson method to solve non-linear equations programmatically.</p>
+                <div class="impact-statement">
+                    <strong>Engineering Impact:</strong> Showcased advanced computational mechanics skills. I don't just rely on FEA "black boxes"—I can code the underlying physics and failure theories from first principles.
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('chimney')">
+                    <img src="chimney1.jpg" alt="Chimney FEA MATLAB vs ANSYS" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+chimney1.jpg'">
+                    <div class="image-overlay">Click to View Gallery</div>
+                </div>
+                <h4>First-Principles Heat Conduction FEA Coding</h4>
+                <span class="tools-used">Tools: MATLAB, ANSYS Workbench</span>
+                <p>Rather than simply using commercial software, I built an FEA solver from scratch. Coded a comprehensive MATLAB program to calculate temperature and flux distribution across an isotropic chimney.</p>
+                <p>Programmed the mathematical backbone using the Gauss Quadrature Integration technique to convert physical coordinates into reference coordinates. Validated my custom code's accuracy by cross-referencing the outputs against commercial ANSYS steady-state thermal results.</p>
+                <div class="impact-statement">
+                    <strong>Engineering Impact:</strong> Exhibited a deep, foundational mastery of Finite Element Analysis mathematics, ensuring I can critically evaluate and troubleshoot complex thermal management simulations.
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('minitab')">
+                    <img src="minitab1.jpg" alt="MINITAB Pareto Chart & Analysis" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+minitab1.jpg'">
+                    <div class="image-overlay">Click to View Gallery</div>
+                </div>
+                <h4>Statistical Design of Experiments (DoE) Validation</h4>
+                <span class="tools-used">Tools: MINITAB, Statistical Analysis</span>
+                <p>Led a data-driven investigation to validate wearable device calorie estimations against physical gym bicycle parameters. Executed a rigorous 2^3 Full Factorial Design matrix.</p>
+                <p>Conducted advanced statistical analysis including Paired T-tests and 2-Sample T-tests to establish statistical significance. Derived a regression equation to determine the exact optimal variable settings for maximum output.</p>
+                <div class="impact-statement">
+                    <strong>Engineering Impact:</strong> Proved highly capable in Six Sigma/Quality Control methodologies. Ready to apply statistical rigor and Minitab analysis to optimize real-world manufacturing processes.
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('plate')">
+                    <img src="plate1.jpg" alt="Transient Heat Conduction MATLAB Analysis" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+plate1.jpg'">
+                    <div class="image-overlay">Click to View Gallery</div>
+                </div>
+                <h4>Transient Heat Conduction Analysis of a 2D Plate </h4>
+                <span class="tools-used">Tools: MATLAB , Numerical Methods (FTCS & ADI)</span>
+                <p>Numerically solved the 2D differential equation for transient heat conduction from a rectangular plate. Efficiently coded a MATLAB program executing both Forward Difference in Time and Central Difference in Space (FTCS) and Alternating Direction Implicit (ADI) schemes.</p>
+                <p>Minimized computational time and storage space through optimized MATLAB functions. Engineered a custom logic to modify the standard ADI method, eliminating its directional bias by alternating implicit scheme applications across time increments.</p>
+                <div class="impact-statement">
+                    <strong>Engineering Impact:</strong> Demonstrated advanced proficiency in computational methods and algorithm optimization for complex thermal simulations, validating performance against multiple numerical schemes.
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('pouring')">
+                    <img src="pouring1.jpg" alt="Automated Pouring Machine" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+pouring1.jpg'">
+                    <div class="image-overlay">Click to View Gallery</div>
+                </div>
+                <h4>Mechatronic Automated Pouring Machine</h4>
+                <span class="tools-used">Tools: SolidWorks, Arduino Mega, Stepper Motors, Load Cells</span>
+                <p>Designed and built a mechatronic system capable of ultra-precise liquid dispensing. Integrated mechanical hardware with electronic sensors by calibrating a Load Cell to provide real-time weight feedback to an Arduino Mega microcontroller.</p>
+                <p>Wrote the control logic in Arduino, successfully implementing a Proportional-Integral (PI) control loop to drive a NEMA 17 Stepper Motor based on the exact weight differential.</p>
+                <div class="impact-statement">
+                    <strong>Engineering Impact:</strong> Demonstrated strong cross-disciplinary ability in Mechatronics, integrating mechanical design with IoT/sensor hardware and automated control logic.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="certifications" class="page-content">
+        <div class="card">
+            <h2>Professional Certifications & Credentials</h2>
+            <p>I am relentlessly dedicated to continuous improvement, consistently upgrading my technical toolkit through industry-standard credentialing. <strong>Click on any image to view the full certificate.</strong></p>
+        </div>
+
+        <div class="grid-layout">
+            
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_gdt_adv')">
+                    <img src="cert_gdt_adv.jpg" alt="Advanced GD&T" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_gdt_adv.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>Advanced GD&T</h4>
+                <span class="tools-used">Applied Geometrics, Inc. | October 2025</span>
+                <p>Advanced concepts and applications of Geometric Dimensioning and Tolerancing.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_gdt_fund')">
+                    <img src="cert_gdt_fund.jpg" alt="Fundamentals of GD&T ASME Y14.5 v2018" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_gdt_fund.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>Fundamentals of GD&T ASME Y14.5 v2018</h4>
+                <span class="tools-used">Applied Geometrics, Inc. | July 2024</span>
+                <p>Completed 2.4 CEU Credit Hours covering comprehensive Geometric Dimensioning and Tolerancing standards.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_sixsigma')">
+                    <img src="cert_sixsigma.jpg" alt="Six Sigma: Define and Measure" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_sixsigma.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>Six Sigma: Define and Measure</h4>
+                <span class="tools-used">TUMx (edX)</span>
+                <p>Professional certification covering core Six Sigma methodologies, process definition, and advanced data measurement techniques.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_fmea')">
+                    <img src="cert_fmea.jpg" alt="Risk Management FMEA" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_fmea.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>Risk Management: Master FMEA/FMECA & Criticality from A to Z</h4>
+                <span class="tools-used">Udemy | Oct 2020</span>
+                <p>Comprehensive training on failure mode and effects analysis for robust product design.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_sim')">
+                    <img src="cert_sim.jpg" alt="A Hands-on Introduction to Engineering Simulations" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_sim.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>A Hands-on Introduction to Engineering Simulations</h4>
+                <span class="tools-used">Cornell University (edX) | July 2020</span>
+                <p>Verification and Validation using Hand Calculations and Experimental Data, Mathematical Models in ANSYS Solver, Heat Transfer, and Structural Mechanics.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_solidworks_bundle')">
+                    <img src="cert_dyn.jpg" alt="SolidWorks Certifications" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Click+to+view+all+5+Certs'">
+                    <div class="image-overlay">View All Certificates</div>
+                </div>
+                <h4>SolidWorks Certified Professional Training</h4>
+                <span class="tools-used">LinkedIn Learning | Jul-Sep 2020</span>
+                <p><strong>Includes 5 Professional Credentials:</strong><br>
+                1. Simulation Dynamic Analysis<br>
+                2. Simulation for FEA<br>
+                3. Sheet Metal<br>
+                4. Mold Design<br>
+                5. Design Study and Optimization</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_flow')">
+                    <img src="cert_flow.jpg" alt="Flow Simulation Using SolidWorks" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_flow.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>Flow Simulation Using SolidWorks</h4>
+                <span class="tools-used">Skill Lync | July 2020</span>
+                <p>Meshing strategies, Moving Reference Frame, Flow over airfoil, and Centrifugal Pump Flow Simulation.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_matlab')">
+                    <img src="cert_matlab.jpg" alt="MATLAB for Mechanical Engineers" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_matlab.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>MATLAB for Mechanical Engineers</h4>
+                <span class="tools-used">Skill Lync | Jan 2019</span>
+                <p>Curve fitting, solving ODEs, Genetic Algorithms, parsing NASA thermodynamic files, and Rankine Cycle simulation.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_product')">
+                    <img src="cert_product.jpg" alt="Product Design and Analysis" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_product.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>Product Design and Analysis</h4>
+                <span class="tools-used">CADD Centre | July 2018</span>
+                <p>Upgraded and applied skills in SolidWorks, ANSYS, and GD&T.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_german')">
+                    <img src="cert_german.jpg" alt="German Level A2" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_german.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>German Level A2</h4>
+                <span class="tools-used">Goethe-Institut e.V. | Feb 2018</span>
+                <p>Proficiency in basic German language communication and comprehension.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Ready to collaborate? <a href="mailto:vishukolge@gmail.com">vishukolge@gmail.com</a> | <a href="https://www.linkedin.com/in/vk8/" target="_blank">Connect on LinkedIn</a></p>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #7f8c8d;">&copy; 2026 Vishwaraj Pravin Kolge. All rights reserved.</p>
+    </footer>
+
+    <div id="lightboxModal" class="modal">
+        <span class="close" onclick="closeGallery()">&times;</span>
+        <a class="prev" onclick="changeImage(-1)">&#10094;</a>
+        <img class="modal-content" id="modalImage">
+        <a class="next" onclick="changeImage(1)">&#10095;</a>
+    </div>
+
+    <div id="resumeModal" class="modal" style="padding-top: 20px;">
+        <div class="resume-modal-content">
+            <span class="close-resume" onclick="closeResumeModal()">&times;</span>
+            <div class="resume-header">
+                <h2 style="margin: 0; color: #2c3e50;">Vishwaraj Pravin Kolge - Resume</h2>
+                <a href="resume.pdf" download="Vishwaraj_Kolge_Resume.pdf" class="btn">Download PDF</a>
+            </div>
+            <iframe src="resume.pdf" class="resume-iframe"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Bulletproof auto-cleaner
+        document.addEventListener("DOMContentLoaded", function() {
+            const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+            let n;
+            const regex = /\[cite_start\]|\]+\]/g;
+            while(n = walk.nextNode()) {
+                if(regex.test(n.nodeValue)) {
+                    n.nodeValue = n.nodeValue.replace(regex, '');
+                }
+            }
+        });
+
+        // Navigation
+        function openPage(btnElement, pageId) {
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- Resume Modal Logic ---
+        function openResumeModal() {
+            document.getElementById('resumeModal').style.display = 'block';
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resumeModal').style.display = 'none';
+        }
+
+        // --- Lightbox Image Gallery System ---
+        const projectGalleries = {
+            'gokart': ['gokart1.jpg', 'gokart2.jpg', 'gokart3.jpg', 'gokart4.jpg'],
+            'plate': ['plate1.jpg', 'plate2.jpg', 'plate3.jpg', 'plate4.jpg', 'plate5.jpg'],
+            'lcftool': ['lcftool1.jpg', 'lcftool2.jpg', 'lcftool3.jpg', 'lcftool4.jpg'],
+            'pouring': ['pouring1.jpg', 'pouring2.jpg', 'pouring3.jpg', 'pouring4.jpg'],
+            'chimney': ['chimney1.jpg', 'chimney2.jpg', 'chimney3.jpg', 'chimney4.jpg', 'chimney5.jpg'],
+            'minitab': ['minitab1.jpg', 'minitab2.jpg', 'minitab3.jpg', 'minitab4.jpg'],
+            
+            // Certificate Images:
+            'cert_gdt_adv': ['cert_gdt_adv.jpg'],
+            'cert_gdt_fund': ['cert_gdt_fund.jpg'],
+            'cert_sixsigma': ['cert_sixsigma.jpg'],
+            'cert_fmea': ['cert_fmea.jpg'],
+            'cert_sim': ['cert_sim.jpg'],
+            'cert_flow': ['cert_flow.jpg'],
+            
+            // The Consolidated SolidWorks Gallery
+            'cert_solidworks_bundle': ['cert_dyn.jpg', 'cert_fea.jpg', 'cert_sheet.jpg', 'cert_mold.jpg', 'cert_design_study.jpg'],
+            
+            'cert_matlab': ['cert_matlab.jpg'],
+            'cert_product': ['cert_product.jpg'],
+            'cert_german': ['cert_german.jpg']
+        };
+
+        let currentGallery = [];
+        let currentImageIndex = 0;
+
+        function openGallery(projectId) {
+            currentGallery = projectGalleries[projectId];
+            if (!currentGallery || currentGallery.length === 0) return;
+            
+            currentImageIndex = 0;
+            document.getElementById('modalImage').src = currentGallery[currentImageIndex];
+            document.getElementById('lightboxModal').style.display = 'block';
+        }
+
+        function closeGallery() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            
+            if (currentImageIndex >= currentGallery.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = currentGallery.length - 1;
+            }
+            
+            document.getElementById('modalImage').src = currentGallery[currentImageIndex];
+        }
+
+        // Close when clicking on the dark background for BOTH modals
+        window.onclick = function(event) {
+            const lightboxModal = document.getElementById('lightboxModal');
+            const resumeModal = document.getElementById('resumeModal');
+            
+            if (event.target == lightboxModal) {
+                closeGallery();
+            }
+            if (event.target == resumeModal) {
+                closeResumeModal();
+            }
+        }
+    </script>
+</body>
+</html>
