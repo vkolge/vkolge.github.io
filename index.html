@@ -39,12 +39,14 @@
             width: 85%;
             margin: auto;
             display: flex;
-            justify-content: center; /* Centered the navigation links */
+            justify-content: center;
             align-items: center;
         }
         .nav-links {
             display: flex;
             gap: 20px;
+            flex-wrap: wrap; 
+            justify-content: center;
         }
         .nav-btn {
             background: none;
@@ -109,6 +111,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-bottom: 30px;
+            flex-wrap: wrap; 
         }
         .profile-img {
             width: 200px;
@@ -223,7 +226,6 @@
             animation: zoomIn 0.3s ease;
         }
         
-        /* Resume Modal Specifics */
         .resume-modal-content {
             background-color: #f4f7f6;
             margin: 0 auto;
@@ -309,6 +311,8 @@
             margin-bottom: 15px;
             display: block;
         }
+        
+        /* Impact Statement (Unbolded Text) */
         .impact-statement {
             background-color: #e8f6f3;
             border-left: 4px solid var(--success-color);
@@ -316,7 +320,7 @@
             margin-top: auto; 
             font-size: 0.95rem;
             color: #1e8449;
-            font-weight: 500;
+            font-weight: normal; 
         }
 
         .skills-grid {
@@ -330,6 +334,12 @@
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
+        }
+        
+        /* Fun Section Specifics */
+        .fun-bg {
+            background-color: #eaf2f8; 
+            border-left: 5px solid #2980b9;
         }
 
         footer {
@@ -357,9 +367,10 @@
         <div class="nav-container">
             <div class="nav-links">
                 <button class="nav-btn active" onclick="openPage(this, 'home')">Home</button>
-                <button class="nav-btn" onclick="openPage(this, 'experience')">Experience</button>
+                <button class="nav-btn" onclick="openPage(this, 'experience')">Experience & Achievements</button>
                 <button class="nav-btn" onclick="openPage(this, 'projects')">Projects</button>
                 <button class="nav-btn" onclick="openPage(this, 'certifications')">Certifications</button>
+                <button class="nav-btn" onclick="openPage(this, 'fun')">Beyond Engineering</button>
             </div>
         </div>
     </nav>
@@ -370,7 +381,7 @@
             <div class="profile-info">
                 <h1>Vishwaraj Pravin Kolge</h1>
                 <h3>Mechanical Design Engineer | MS Mechanical Engineering</h3>
-                <p>I am a multifaceted Design Engineer with a proven track record of bridging the gap between advanced computational theory and high-volume manufacturing. With 5 years of experience in full product lifecycle management, I specialize in driving aggressive cost-down initiatives—having successfully engineered $560K in VA/VE savings and achieved a 96% reduction in defect rates. I deliver elite-level CAD modeling, rigorous FEA/CFD validation, and hands-on rapid prototyping to bring robust, profitable products to market.</p>
+                <p>I am a results-driven Design Engineer with a proven track record of bridging the gap between computational theory and high-volume manufacturing. With 5 years of experience in full product lifecycle management, I specialize in strategic VA/VE cost optimization—having engineered over $560K in savings and achieved a 96% reduction in defect rates. I focus on delivering high-fidelity CAD modeling, rigorous FEA/CFD validation, and hands-on rapid prototyping to help teams bring robust, reliable products to market.</p>
                 <div style="margin-top: 15px;">
                     <strong>Email:</strong> vishukolge@gmail.com | <strong>Phone:</strong> +1-704-756-0205<br>
                     <strong>Location:</strong> Clarksville, TN | <a href="https://www.linkedin.com/in/vk8/" target="_blank" style="color: var(--accent-color);">LinkedIn Profile</a>
@@ -378,6 +389,28 @@
                     <br><br>
                     <button class="btn" onclick="openResumeModal()">View / Download Resume</button>
                 </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Education</h2>
+            
+            <div style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.3rem;">Master of Science in Mechanical Engineering</h3>
+                <strong style="font-size: 1.1rem; color: var(--primary-color);">University of North Carolina at Charlotte</strong> | <em>Charlotte, NC, USA</em>
+                <br><span style="color: #666; font-size: 0.95rem;">Aug 2018 - May 2020</span>
+                <p style="margin-top: 8px; font-size: 1.05rem;">
+                    <strong>GPA:</strong> <span style="color: var(--success-color); font-weight: bold;">4.0 / 4.0</span>
+                </p>
+            </div>
+
+            <div>
+                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.3rem;">Bachelor of Engineering in Mechanical Engineering</h3>
+                <strong style="font-size: 1.1rem; color: var(--primary-color);">University of Mumbai</strong> | <em>Mumbai, MH, India</em>
+                <br><span style="color: #666; font-size: 0.95rem;">Jul 2013 - May 2017</span>
+                <p style="margin-top: 8px; font-size: 1.05rem;">
+                    <strong>GPA:</strong> <span style="color: var(--success-color); font-weight: bold;">8.0 / 10.0</span>
+                </p>
             </div>
         </div>
 
@@ -400,45 +433,68 @@
 
     <div id="experience" class="page-content">
         <div class="card">
-            <h2>Professional Experience</h2>
+            <h2>Professional Experience & Achievements</h2>
+            <p style="margin-bottom: 30px; color: #555;">An in-depth look at my professional engineering roles, focusing on complex problem-solving, strategic cost reductions, and full-lifecycle product design.</p>
             
-            <div style="margin-bottom: 30px;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Design Engineer</h3>
-                <strong>White Drive Motors and Steering</strong> | <em>Apr 2024 - Present | Hopkinsville, KY</em>
-                <ul>
-                    <li>Orchestrated an end-to-end project to insource critical hydraulic motor sub-components due to supplier failures. Managed total lifecycle (CAD/BOM updates, procurement, PPAP, testing), successfully driving 50% cash-flow retention.</li>
-                    <li>Validated rigorous design and supplier changes through controlled testing, enabling a massive 30% reduction in COGS.</li>
-                    <li>Resolved complex hydraulic motor design and field issues, directly boosting quality, reliability, and manufacturability.</li>
-                </ul>
+            <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Design Engineer</h3>
+                <strong style="font-size: 1.1rem; color: var(--primary-color);">White Drive Motors and Steering</strong> | <em>Apr 2024 - Present | Hopkinsville, KY</em>
+                
+                <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Supply Chain Rescue & In-House Manufacturing</h4>
+                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Faced a critical production roadblock when a key supplier suddenly ceased the fabrication and assembly of a vital bearing housing sub-assembly, threatening active customer orders.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Orchestrated an end-to-end insourcing project. I completely restructured and redesigned the sub-components for internal manufacturing, rebuilt the CAD models and BOM, sourced raw castings from a new supplier, and established the internal machining and assembly processes.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Validated through controlled testing, this initiative drove 50% cash-flow retention and achieved a 30% reduction in COGS.</p>
+                </div>
+
+                <div style="margin-top: 15px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Acoustic Field Failure Resolution (8D Methodology)</h4>
+                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Received customer field claims regarding abnormal and disruptive noise coming from specific hydraulic motors.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Led an 8D problem-solving initiative alongside the engineering team. Conducted rigorous physical teardowns and functional testing of the failing motors. Successfully isolated the root cause to valve timing discrepancies and executed deep component-level investigations.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Implemented targeted component redesigns that completely resolved the acoustic issues, restoring optimal field reliability and protecting customer relationships.</p>
+                </div>
             </div>
 
-            <div style="margin-bottom: 30px;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Design Engineer</h3>
-                <strong>T.RAD North America, Inc.</strong> | <em>Apr 2021 - Apr 2024 | Hopkinsville, KY</em>
-                <ul>
-                    <li>Spearheaded aggressive VA/VE initiatives for automotive heat exchangers, achieving $560K in tangible cost savings without compromising product integrity.</li>
-                    <li>Achieved an outstanding 96% reduction in defect rates for stamped metal parts by deploying structured Root Cause problem-solving approaches.</li>
-                    <li>Implemented 56 critical engineering changes under tight deadlines, securing a 98% first-pass approval rate to drastically minimize rework.</li>
-                    <li>Executed advanced FEA and CFD analyses using ANSYS to optimize highly complex thermal systems.</li>
-                </ul>
+            <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Design Engineer</h3>
+                <strong style="font-size: 1.1rem; color: var(--primary-color);">T.RAD North America, Inc.</strong> | <em>Apr 2021 - Apr 2024 | Hopkinsville, KY</em>
+                
+                <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Strategic VA/VE Cost Optimization ($560K Savings)</h4>
+                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Tasked with aggressively reducing manufacturing costs for automotive heat exchangers without compromising structural integrity or thermal performance.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Directed 3 high-impact Value Analysis/Value Engineering (VA/VE) projects. Strategically altered component materials to cheaper, equally viable alternatives. Additionally, I reshaped and reduced the thickness of an oil cooler mounting flange, saving $0.50 per unit manufactured.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Combined efforts across these 3 projects yielded $560K in tangible, realized cost savings for the company.</p>
+                </div>
+
+                <div style="margin-top: 15px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Advanced Multi-Physics Simulation & Quality Assurance</h4>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Validated complex automotive heat exchangers by performing multi-disciplinary CAE simulations in ANSYS. Executed Conjugate Heat Transfer (CHT) analysis to identify thermal stresses, CFD flow analysis to optimize pressure drops, and vibration FEA to ensure structural integrity against fatigue failure.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Deployed Root Cause problem-solving to achieve a 96% reduction in defect rates for stamped metal parts, while concurrently implementing 56 critical engineering changes with a 98% first-pass approval rate.</p>
+                </div>
             </div>
             
-            <div style="margin-bottom: 30px;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Researcher</h3>
-                <strong>UNC Charlotte, Computational Mechanics Lab</strong> | <em>Jul 2020 - Apr 2021 | Charlotte, NC</em>
-                <ul>
-                    <li>Dramatically improved analysis efficiency by generating 100+ ABAQUS FEA models with cohesive elements.</li>
-                    <li>Wrote custom Python scripts to completely automate the modeling process, allowing for rapid generation of unique model variations per run.</li>
-                </ul>
+            <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Researcher</h3>
+                <strong style="font-size: 1.1rem; color: var(--primary-color);">UNC Charlotte, Computational Mechanics Lab</strong> | <em>Jul 2020 - Apr 2021 | Charlotte, NC</em>
+                
+                <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">FEA Process Automation via Python</h4>
+                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Investigating material crack propagation required generating 100+ highly complex ABAQUS FEA models utilizing cohesive elements. Executing a single job manually took upwards of 4 hours, creating a massive research bottleneck.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Engineered a custom Python script to completely automate the modeling process. The script was designed to generate unique model variations and parameters programmatically per run.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Reduced complex model setup time from 4 hours down to mere seconds, exponentially increasing analysis efficiency and throughput.</p>
+                </div>
             </div>
             
-            <div style="margin-bottom: 30px;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px;">Product Development Intern</h3>
-                <strong>Enventys Partners</strong> | <em>May 2019 - Aug 2019 | Charlotte, NC</em>
-                <ul>
-                    <li>Coherently worked with Mechanical Engineers to design and develop concept models and prototypes using SolidWorks.</li>
-                    <li>Fabricated components hands-on utilizing SLA 3D Printing, Waterjet Cutting, and Laser Cutting.</li>
-                </ul>
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Product Development Intern</h3>
+                <strong style="font-size: 1.1rem; color: var(--primary-color);">Enventys Partners</strong> | <em>May 2019 - Aug 2019 | Charlotte, NC</em>
+                
+                <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">IoT Closet Lighting System (CES 2020)</h4>
+                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> The initial functional prototypes for a new IoT closet lighting system were far too bulky for commercial consumer use.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Collaborated with Mechanical Engineers to iterate 3D packaging in SolidWorks. Strategically reorganized internal PCB and hardware components to dramatically reduce the overall spatial footprint of the enclosure. Fabricated the physical components hands-on utilizing SLA 3D Printing, Waterjet, and Laser Cutting.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Delivered a sleek, highly optimized functional prototype that contributed to a successful commercial launch at CES 2020.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -446,7 +502,7 @@
     <div id="projects" class="page-content">
         <div class="card">
             <h2>Engineering Projects</h2>
-            <p>I do not just operate software; I understand the mathematics behind it and the manufacturing processes required to build it. <strong>Click on any project image below to view the detailed image gallery, including CAD models, physical prototypes, and analysis plots.</strong></p>
+            <p>I believe in understanding the fundamental engineering principles and manufacturing processes behind the software, rather than just operating the tools. <strong>Click on any project image below to view the detailed image gallery, including CAD models, physical prototypes, and analysis plots.</strong></p>
         </div>
         <div class="grid-layout">
             <div class="grid-card">
@@ -538,7 +594,7 @@
     <div id="certifications" class="page-content">
         <div class="card">
             <h2>Professional Certifications & Credentials</h2>
-            <p>I am relentlessly dedicated to continuous improvement, consistently upgrading my technical toolkit through industry-standard credentialing. <strong>Click on any image to view the full certificate.</strong></p>
+            <p>I am dedicated to continuous improvement, consistently upgrading my technical toolkit through industry-standard credentialing. <strong>Click on any image to view the full certificate.</strong></p>
         </div>
 
         <div class="grid-layout">
@@ -650,6 +706,45 @@
         </div>
     </div>
 
+    <div id="fun" class="page-content">
+        <div class="card fun-bg">
+            <h2>Beyond Engineering</h2>
+            <p>When I'm not designing hydraulic systems or running FEA simulations, here is how I stay active, curious, and inspired.</p>
+        </div>
+
+        <div class="grid-layout">
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('fun_active')">
+                    <img src="fun_travel.jpg" alt="Traveling & Staying Active" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+fun_travel.jpg'">
+                    <div class="image-overlay">View Gallery</div>
+                </div>
+                <h4>Active Living & Exploring</h4>
+                <span class="tools-used">Football • Yoga • Travel</span>
+                <p>Whether I'm on the football pitch, finding my center and focus through yoga, or traveling to new destinations to experience different cultures, I believe staying active is the key to maintaining a sharp, creative mind in engineering.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('fun_photo')">
+                    <img src="fun_photo.jpg" alt="Photography" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+fun_photo.jpg'">
+                    <div class="image-overlay">View Gallery</div>
+                </div>
+                <h4>Through the Lens</h4>
+                <span class="tools-used">Amateur Photography</span>
+                <p>I love capturing moments through the lens. Photography allows me to blend an engineer's technical precision with artistic framing. From sweeping travel landscapes to candid everyday shots, it's a constant pursuit of the perfect angle.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('fun_chill')">
+                    <img src="fun_games.jpg" alt="Boardgames and Music" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+fun_games.jpg'">
+                    <div class="image-overlay">View Gallery</div>
+                </div>
+                <h4>Strategy & Sound</h4>
+                <span class="tools-used">Boardgames • Music</span>
+                <p>As an engineer, I love a good puzzle. Board games are my favorite way to exercise strategic thinking, logic, and resource management while having a great time with friends. Pair that with a great playlist, and it's the perfect way to unwind.</p>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>Ready to collaborate? <a href="mailto:vishukolge@gmail.com">vishukolge@gmail.com</a> | <a href="https://www.linkedin.com/in/vk8/" target="_blank">Connect on LinkedIn</a></p>
         <p style="font-size: 0.8rem; margin-top: 10px; color: #7f8c8d;">&copy; 2026 Vishwaraj Pravin Kolge. All rights reserved.</p>
@@ -735,13 +830,15 @@
             'cert_fmea': ['cert_fmea.jpg'],
             'cert_sim': ['cert_sim.jpg'],
             'cert_flow': ['cert_flow.jpg'],
-            
-            // The Consolidated SolidWorks Gallery
             'cert_solidworks_bundle': ['cert_dyn.jpg', 'cert_fea.jpg', 'cert_sheet.jpg', 'cert_mold.jpg', 'cert_design_study.jpg'],
-            
             'cert_matlab': ['cert_matlab.jpg'],
             'cert_product': ['cert_product.jpg'],
-            'cert_german': ['cert_german.jpg']
+            'cert_german': ['cert_german.jpg'],
+            
+            // Fun Galleries!
+            'fun_active': ['fun_travel.jpg', 'fun_football.jpg', 'fun_yoga.jpg'],
+            'fun_photo': ['fun_photo.jpg', 'fun_photo2.jpg', 'fun_photo3.jpg'],
+            'fun_chill': ['fun_games.jpg', 'fun_music.jpg']
         };
 
         let currentGallery = [];
