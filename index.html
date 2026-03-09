@@ -24,6 +24,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
         /* Top Navigation Bar */
@@ -95,40 +96,126 @@
         .page-content.active {
             display: block;
         }
+        
+        /* STRICT JUSTIFICATION FOR ALL PARAGRAPHS */
+        .page-content p, .impact-statement {
+            text-align: justify;
+            text-justify: inter-word;
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header / Profile Area */
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 30px;
+        /* HERO SECTION */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
             background: #fff;
-            padding: 40px;
+            padding: 50px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
             margin-bottom: 30px;
-            flex-wrap: wrap; 
+            align-items: center;
         }
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--accent-color);
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-image-container {
+                order: -1;
+                margin-bottom: 20px;
+            }
         }
-        .profile-info h1 {
+
+        .hero-text h1 {
             margin: 0 0 10px 0;
             color: var(--primary-color);
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            line-height: 1.1;
         }
-        .profile-info h3 {
-            margin: 0 0 15px 0;
+        .hero-text h3 {
+            margin: 0 0 20px 0;
             color: var(--accent-color);
             font-weight: 500;
+            font-size: 1.4rem;
+        }
+        .hero-text p {
+            font-size: 1.05rem;
+            color: #444;
+            margin-bottom: 25px;
+        }
+        
+        .hero-contact {
+            background: var(--light-bg);
+            padding: 15px 20px;
+            border-left: 4px solid var(--accent-color);
+            border-radius: 4px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            text-align: left; 
+        }
+        .hero-contact a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .hero-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-img {
+            width: 100%;
+            max-width: 290px;
+            border-radius: 12px;
+            box-shadow: -15px 15px 0px var(--light-bg), -15px 15px 0px 2px var(--accent-color);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .hero-img:hover {
+            transform: translateY(-5px);
+        }
+
+        /* PERFECT ALIGNMENT HEADERS FOR RESUME LOOK */
+        .flex-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        .flex-header h3 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        .flex-header span.date {
+            color: var(--accent-color);
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .company-location {
+            font-size: 1.15rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: left;
+        }
+        .company-location span {
+            color: #7f8c8d;
+            font-weight: 400;
+            font-size: 0.95rem;
         }
 
         /* Cards & Grids */
@@ -312,28 +399,89 @@
             display: block;
         }
         
-        /* Impact Statement (Unbolded Text) */
+        /* Impact Statement */
         .impact-statement {
             background-color: #e8f6f3;
             border-left: 4px solid var(--success-color);
-            padding: 10px 15px;
+            padding: 12px 15px;
             margin-top: auto; 
             font-size: 0.95rem;
             color: #1e8449;
             font-weight: normal; 
+            text-align: justify; 
         }
 
+        /* --- INTERACTIVE SKILLS GRID WITH CSS TOOLTIPS --- */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
         .skill-tag {
             background: var(--secondary-color);
             color: #fff;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
+            position: relative; /* Anchor for tooltip */
+            cursor: help; /* Shows the user it can be hovered */
+            transition: background 0.3s ease;
+        }
+        .skill-tag:hover {
+            background: var(--accent-color);
+        }
+
+        /* Tooltip Box */
+        .skill-tag::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            font-weight: normal;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, bottom 0.3s ease;
+            z-index: 100;
+            pointer-events: none; /* Prevents tooltip from glitching hover */
+        }
+
+        /* Tooltip Arrow */
+        .skill-tag::before {
+            content: '';
+            position: absolute;
+            bottom: 105%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--primary-color) transparent transparent transparent;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, bottom 0.3s ease;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        /* Hover Animation */
+        .skill-tag:hover::after {
+            opacity: 1;
+            visibility: visible;
+            bottom: 140%;
+        }
+        .skill-tag:hover::before {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(140% - 12px);
         }
         
         /* Fun Section Specifics */
@@ -376,57 +524,87 @@
     </nav>
 
     <div id="home" class="page-content active">
-        <div class="profile-header">
-            <img src="profile.jpg" alt="Vishwaraj Kolge" class="profile-img">
-            <div class="profile-info">
+        
+        <div class="hero-section">
+            <div class="hero-text">
                 <h1>Vishwaraj Pravin Kolge</h1>
                 <h3>Mechanical Design Engineer | MS Mechanical Engineering</h3>
-                <p>I am a results-driven Design Engineer with a proven track record of bridging the gap between computational theory and high-volume manufacturing. With 5 years of experience in full product lifecycle management, I specialize in strategic VA/VE cost optimization—having engineered over $560K in savings and achieved a 96% reduction in defect rates. I focus on delivering high-fidelity CAD modeling, rigorous FEA/CFD validation, and hands-on rapid prototyping to help teams bring robust, reliable products to market.</p>
-                <div style="margin-top: 15px;">
-                    <strong>Email:</strong> vishukolge@gmail.com | <strong>Phone:</strong> +1-704-756-0205<br>
-                    <strong>Location:</strong> Clarksville, TN | <a href="https://www.linkedin.com/in/vk8/" target="_blank" style="color: var(--accent-color);">LinkedIn Profile</a>
-                    
-                    <br><br>
-                    <button class="btn" onclick="openResumeModal()">View / Download Resume</button>
+                
+                <p>I am a results-driven Mechanical Design Engineer with over 5 years of experience in the full product lifecycle development of automotive and heavy machinery products. Leveraging advanced CAD, FEA, CFD, and PLM tools, I consistently deliver complex engineering milestones through rigorous APQP processes. Driven by continuous improvement, I have successfully delivered 50% cash-flow retention and $180K in annual cost savings through strategic value engineering. I pride myself on owning the technical interface between customers, cross-functional global teams, and suppliers to translate strict requirements into highly reliable, mass-production-ready designs.</p>
+                
+                <div class="hero-contact">
+                    <strong>Email:</strong> work.vkolge@gmail.com <br>
+                    <strong>Phone:</strong> +1-704-756-0205 <br>
+                    <strong>Location:</strong> Clarksville, TN, USA <br>
+                    <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vk8/" target="_blank">linkedin.com/in/vk8</a>
                 </div>
+
+                <button class="btn" onclick="openResumeModal()">View / Download Resume</button>
+            </div>
+            
+            <div class="hero-image-container">
+                <img src="profile.jpg" alt="Vishwaraj Kolge" class="hero-img" onerror="this.src='https://via.placeholder.com/320x400'">
             </div>
         </div>
 
         <div class="card">
             <h2>Education</h2>
             
-            <div style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #eee;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.3rem;">Master of Science in Mechanical Engineering</h3>
-                <strong style="font-size: 1.1rem; color: var(--primary-color);">University of North Carolina at Charlotte</strong> | <em>Charlotte, NC, USA</em>
-                <br><span style="color: #666; font-size: 0.95rem;">Aug 2018 - May 2020</span>
-                <p style="margin-top: 8px; font-size: 1.05rem;">
+            <div style="margin-bottom: 25px;">
+                <div class="flex-header">
+                    <h3>Master of Science in Mechanical Engineering</h3>
+                    <span class="date">Aug 2018 - May 2020</span>
+                </div>
+                <div class="company-location">
+                    University of North Carolina at Charlotte <span>| Charlotte, NC, USA</span>
+                </div>
+                <p style="margin-top: 8px; font-size: 1.05rem; margin-bottom: 0; text-align: left;">
                     <strong>GPA:</strong> <span style="color: var(--success-color); font-weight: bold;">4.0 / 4.0</span>
                 </p>
             </div>
 
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+
             <div>
-                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.3rem;">Bachelor of Engineering in Mechanical Engineering</h3>
-                <strong style="font-size: 1.1rem; color: var(--primary-color);">University of Mumbai</strong> | <em>Mumbai, MH, India</em>
-                <br><span style="color: #666; font-size: 0.95rem;">Jul 2013 - May 2017</span>
-                <p style="margin-top: 8px; font-size: 1.05rem;">
-                    <strong>GPA:</strong> <span style="color: var(--success-color); font-weight: bold;">8.0 / 10.0</span>
+                <div class="flex-header">
+                    <h3>Bachelor of Engineering in Mechanical Engineering</h3>
+                    <span class="date">Jul 2013 - May 2017</span>
+                </div>
+                <div class="company-location">
+                    University of Mumbai <span>| Mumbai, MH, India</span>
+                </div>
+                <p style="margin-top: 8px; font-size: 1.05rem; margin-bottom: 0; text-align: left;">
+                    <strong>CGPA:</strong> <span style="color: var(--success-color); font-weight: bold;">8.0 / 10.0</span>
                 </p>
             </div>
         </div>
 
         <div class="card">
             <h2>Core Competencies</h2>
+            <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;"><em>Hover over any skill below to see how I have applied it in real-world engineering environments.</em></p>
             <div class="skills-grid">
-                <span class="skill-tag">GD&T ASME Y14.5</span>
-                <span class="skill-tag">SolidWorks & NX CAD</span>
-                <span class="skill-tag">ANSYS (FEA & CFD)</span>
-                <span class="skill-tag">MATLAB & Python</span>
-                <span class="skill-tag">Thermal Management</span>
-                <span class="skill-tag">Hydraulics & Fluids</span>
-                <span class="skill-tag">VA/VE Analysis</span>
-                <span class="skill-tag">Root Cause Analysis (8D)</span>
-                <span class="skill-tag">Teamcenter PLM & SAP</span>
-                <span class="skill-tag">DFMA & Rapid Prototyping</span>
+                <span class="skill-tag" data-tooltip="Designed automotive heat exchangers and executed CHT analysis to identify thermal stresses at T.RAD.">Thermal Management & Heat Transfer</span>
+                <span class="skill-tag" data-tooltip="Resolved hydraulic motor field failures and evaluated system pressure drops via ANSYS Fluent.">Hydraulics & Fluid Mechanics</span>
+                <span class="skill-tag" data-tooltip="Developed custom motor variants and optimized chassis components for weight and structural integrity.">Strength of Materials & Machine Design</span>
+                <span class="skill-tag" data-tooltip="Performed thermal, vibrational, and pressure load simulations on heat exchangers to minimize verification cycle times.">FEA & CFD (ANSYS)</span>
+                
+                <span class="skill-tag" data-tooltip="Delivered 6 complete automotive heat exchanger design packages adhering to phase-gate development protocols.">APQP Process</span>
+                <span class="skill-tag" data-tooltip="Optimized plastic tank snap-fit designs and engineered 100+ ABAQUS composite models for fracture research.">Simulation-Driven Design & Optimization</span>
+                <span class="skill-tag" data-tooltip="Spearheaded heat exchanger verifications and delivered functional IoT enclosure prototypes for CES 2020.">Prototype Testing & Validation</span>
+                <span class="skill-tag" data-tooltip="Spearheaded strategic design and material optimizations yielding $180K in annual cost savings.">VA/VE Analysis</span>
+                <span class="skill-tag" data-tooltip="Updated legacy hydraulic motor drawings to strict GD&T standards, eliminating production interpretation ambiguity.">ASME Y14.5 GD&T</span>
+                <span class="skill-tag" data-tooltip="Restructured bills of materials for sub-assembly insourcing and managed data via IFS ERP.">BOM Management</span>
+                
+                <span class="skill-tag" data-tooltip="Prepared 3D/2D designs in CATIA/Creo and rebuilt motor CAD models in Siemens NX for insourcing.">CAD: NX, SolidWorks, Creo & CATIA</span>
+                <span class="skill-tag" data-tooltip="Streamlined risk-based change management across platforms to achieve a 30% reduction in COGS.">PLM/ERP: Teamcenter, SAP & ProjectLibre</span>
+                <span class="skill-tag" data-tooltip="Automated FEA modeling using Python and evaluated strain-based fatigue life utilizing complex iterative math models.">Data: MATLAB, Python & Minitab</span>
+                
+                <span class="skill-tag" data-tooltip="Established internal machining processes and resolved DFM constraints for complex stamped metal parts.">Metal Forming, Stamping & Machining</span>
+                <span class="skill-tag" data-tooltip="Sourced raw motor castings and replaced screw-fastened plastic tanks with molded snap-fit designs.">Plastic Injection Molding & Casting</span>
+                <span class="skill-tag" data-tooltip="Integrated comprehensive manufacturing constraints into mass-production-ready designs across multiple OEM lines.">Surface & Heat Treatment</span>
+                
+                <span class="skill-tag" data-tooltip="Led an 8D team to isolate motor valving errors and executed 6 comprehensive DFMEA cycles to mitigate failure modes.">Failure Analysis (8D, FMEA, RCA)</span>
+                <span class="skill-tag" data-tooltip="Orchestrated global technical alignment across cross-functional teams in the USA, Japan, and India.">Project Timeline & PLM Management</span>
             </div>
         </div>
     </div>
@@ -436,64 +614,84 @@
             <h2>Professional Experience & Achievements</h2>
             <p style="margin-bottom: 30px; color: #555;">An in-depth look at my professional engineering roles, focusing on complex problem-solving, strategic cost reductions, and full-lifecycle product design.</p>
             
-            <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Design Engineer</h3>
-                <strong style="font-size: 1.1rem; color: var(--primary-color);">White Drive Motors and Steering</strong> | <em>Apr 2024 - Present | Hopkinsville, KY</em>
+            <div style="margin-bottom: 40px;">
+                <div class="flex-header">
+                    <h3>Design Engineer</h3>
+                    <span class="date">Apr 2024 - Present</span>
+                </div>
+                <div class="company-location">
+                    White Drive Motors and Steering LLC <span>| Hopkinsville, KY, USA</span>
+                </div>
                 
                 <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Supply Chain Rescue & In-House Manufacturing</h4>
-                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Faced a critical production roadblock when a key supplier suddenly ceased the fabrication and assembly of a vital bearing housing sub-assembly, threatening active customer orders.</p>
-                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Orchestrated an end-to-end insourcing project. I completely restructured and redesigned the sub-components for internal manufacturing, rebuilt the CAD models and BOM, sourced raw castings from a new supplier, and established the internal machining and assembly processes.</p>
-                    <p class="impact-statement"><strong>Engineering Impact:</strong> Validated through controlled testing, this initiative drove 50% cash-flow retention and achieved a 30% reduction in COGS.</p>
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Sub-Assembly Insourcing & Custom Variant Development</h4>
+                    <p style="margin-bottom: 8px; margin-top:0;"><strong>The Challenge:</strong> Addressed severe supplier disruptions threatening sub-assembly availability while accelerating a new business pipeline requiring custom motor variants.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Partnered with Sales to develop custom variants, computing new motor load curves via <strong>Python</strong> and evaluating fluid pressure drops using <strong>ANSYS Fluent</strong>. Managed an end-to-end insourcing initiative by restructuring the BOM, updating CAD models in <strong>Siemens NX</strong>, coordinating team timelines via <strong>ProjectLibre</strong>, and executing full <strong>PPAP</strong> validations.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Retained 50% cash-flow during supply chain failures and successfully accelerated the new business pipeline by delivering highly reliable motor solutions.</p>
                 </div>
 
                 <div style="margin-top: 15px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Acoustic Field Failure Resolution (8D Methodology)</h4>
-                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Received customer field claims regarding abnormal and disruptive noise coming from specific hydraulic motors.</p>
-                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Led an 8D problem-solving initiative alongside the engineering team. Conducted rigorous physical teardowns and functional testing of the failing motors. Successfully isolated the root cause to valve timing discrepancies and executed deep component-level investigations.</p>
-                    <p class="impact-statement"><strong>Engineering Impact:</strong> Implemented targeted component redesigns that completely resolved the acoustic issues, restoring optimal field reliability and protecting customer relationships.</p>
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Acoustic Field Failure Resolution & Change Management</h4>
+                    <p style="margin-bottom: 8px; margin-top:0;"><strong>The Challenge:</strong> Received critical customer field claims regarding abnormal and disruptive noise coming from specific hydraulic motors.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Led a cross-functional <strong>8D problem-solving</strong> team. Conducted rigorous physical teardowns and functional testing, isolating the root cause to a valving error. Reduced production disruptions and eliminated interpretation ambiguity by updating legacy drawings to <strong>ASME Y14.5 GD&T</strong> standards.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Implemented systemic design and inspection fixes that fully resolved customer claims, achieving a 30% reduction in COGS through streamlined risk-based engineering change management via <strong>Teamcenter PLM</strong> and <strong>SAP</strong>.</p>
                 </div>
             </div>
 
-            <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Design Engineer</h3>
-                <strong style="font-size: 1.1rem; color: var(--primary-color);">T.RAD North America, Inc.</strong> | <em>Apr 2021 - Apr 2024 | Hopkinsville, KY</em>
+            <div style="margin-bottom: 40px;">
+                <div class="flex-header">
+                    <h3>Design Engineer</h3>
+                    <span class="date">Apr 2021 - Apr 2024</span>
+                </div>
+                <div class="company-location">
+                    T.RAD North America Inc. <span>| Hopkinsville, KY, USA</span>
+                </div>
                 
                 <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Strategic VA/VE Cost Optimization ($560K Savings)</h4>
-                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Tasked with aggressively reducing manufacturing costs for automotive heat exchangers without compromising structural integrity or thermal performance.</p>
-                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Directed 3 high-impact Value Analysis/Value Engineering (VA/VE) projects. Strategically altered component materials to cheaper, equally viable alternatives. Additionally, I reshaped and reduced the thickness of an oil cooler mounting flange, saving $0.50 per unit manufactured.</p>
-                    <p class="impact-statement"><strong>Engineering Impact:</strong> Combined efforts across these 3 projects yielded $560K in tangible, realized cost savings for the company.</p>
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Global APQP Product Development</h4>
+                    <p style="margin-bottom: 8px; margin-top:0;"><strong>The Challenge:</strong> Tasked with developing mass-production-ready automotive heat exchangers for demanding OEMs while ensuring adherence to phase-gate development protocols.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Delivered 6 complete design packages utilizing <strong>APQP</strong> phase-gate processes. Prepared 3D models and 2D drawings in <strong>CATIA/Creo</strong> with BOM management in <strong>IFS ERP</strong>. Orchestrated global technical alignment through weekly collaboration across USA, Japan, and Indian teams.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Ensured seamless integration of evolving product requirements, enhanced team technical proficiency by developing CAE Work Instructions, and aided in retaining IATF 16949 certification.</p>
                 </div>
 
                 <div style="margin-top: 15px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Advanced Multi-Physics Simulation & Quality Assurance</h4>
-                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Validated complex automotive heat exchangers by performing multi-disciplinary CAE simulations in ANSYS. Executed Conjugate Heat Transfer (CHT) analysis to identify thermal stresses, CFD flow analysis to optimize pressure drops, and vibration FEA to ensure structural integrity against fatigue failure.</p>
-                    <p class="impact-statement"><strong>Engineering Impact:</strong> Deployed Root Cause problem-solving to achieve a 96% reduction in defect rates for stamped metal parts, while concurrently implementing 56 critical engineering changes with a 98% first-pass approval rate.</p>
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Multi-Physics Validation & Strategic VA/VE ($180K Savings)</h4>
+                    <p style="margin-bottom: 8px; margin-top:0;"><strong>The Action:</strong> Mitigated risk by executing 6 comprehensive <strong>DFMEA</strong> cycles and performing <strong>ANSYS FEA/CFD</strong> simulations for thermal, vibrational, and pressure loads. Spearheaded VA/VE and DFM/DFA initiatives by integrating <strong>poka-yokes</strong> for error-proofing and replacing screw-fastened plastic tanks with optimized snap-fit designs.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Realized $180K in annual cost savings, reduced assembly cycle times, and secured a 98% first-pass approval on 56 critical engineering changes.</p>
                 </div>
             </div>
             
-            <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Researcher</h3>
-                <strong style="font-size: 1.1rem; color: var(--primary-color);">UNC Charlotte, Computational Mechanics Lab</strong> | <em>Jul 2020 - Apr 2021 | Charlotte, NC</em>
+            <div style="margin-bottom: 40px;">
+                <div class="flex-header">
+                    <h3>Researcher</h3>
+                    <span class="date">Jul 2020 - Apr 2021</span>
+                </div>
+                <div class="company-location">
+                    UNC Charlotte, Computational Mechanics Lab <span>| Charlotte, NC, USA</span>
+                </div>
                 
                 <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">FEA Process Automation via Python</h4>
-                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> Investigating material crack propagation required generating 100+ highly complex ABAQUS FEA models utilizing cohesive elements. Executing a single job manually took upwards of 4 hours, creating a massive research bottleneck.</p>
-                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Engineered a custom Python script to completely automate the modeling process. The script was designed to generate unique model variations and parameters programmatically per run.</p>
-                    <p class="impact-statement"><strong>Engineering Impact:</strong> Reduced complex model setup time from 4 hours down to mere seconds, exponentially increasing analysis efficiency and throughput.</p>
+                    <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">Composite Fracture Research & Process Automation</h4>
+                    <p style="margin-bottom: 8px; margin-top:0;"><strong>The Challenge:</strong> Conducting comprehensive research on crack propagation prediction in composites required generating 100+ highly complex <strong>ABAQUS</strong> FEA models utilizing <strong>XFEM</strong> and cohesive elements.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Engineered a custom <strong>Python</strong> script to completely automate the modeling process. The script was designed to generate unique model variations and parameters programmatically per simulation run.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Reduced complex model setup time from hours down to mere seconds, exponentially increasing analysis efficiency and research throughput.</p>
                 </div>
             </div>
             
             <div style="margin-bottom: 20px;">
-                <h3 style="color: var(--accent-color); margin-bottom: 5px; font-size: 1.5rem;">Product Development Intern</h3>
-                <strong style="font-size: 1.1rem; color: var(--primary-color);">Enventys Partners</strong> | <em>May 2019 - Aug 2019 | Charlotte, NC</em>
+                <div class="flex-header">
+                    <h3>Product Development Intern</h3>
+                    <span class="date">May 2019 - Aug 2019</span>
+                </div>
+                <div class="company-location">
+                    Enventys Partners LLC <span>| Charlotte, NC, USA</span>
+                </div>
                 
                 <div style="margin-top: 20px; background: #fff; border-left: 4px solid var(--primary-color); padding: 15px 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                     <h4 style="margin-top: 0; color: var(--secondary-color); font-size: 1.1rem;">IoT Closet Lighting System (CES 2020)</h4>
-                    <p style="margin-bottom: 8px;"><strong>The Challenge:</strong> The initial functional prototypes for a new IoT closet lighting system were far too bulky for commercial consumer use.</p>
-                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Collaborated with Mechanical Engineers to iterate 3D packaging in SolidWorks. Strategically reorganized internal PCB and hardware components to dramatically reduce the overall spatial footprint of the enclosure. Fabricated the physical components hands-on utilizing SLA 3D Printing, Waterjet, and Laser Cutting.</p>
-                    <p class="impact-statement"><strong>Engineering Impact:</strong> Delivered a sleek, highly optimized functional prototype that contributed to a successful commercial launch at CES 2020.</p>
+                    <p style="margin-bottom: 8px; margin-top:0;"><strong>The Challenge:</strong> The initial functional prototypes for a new IoT closet lighting device were far too bulky for commercial consumer use.</p>
+                    <p style="margin-bottom: 8px;"><strong>The Action:</strong> Collaborated with Mechanical Engineers to design electronic enclosures and iterate 3D packaging in <strong>SolidWorks</strong>. Fabricated physical models hands-on utilizing rapid prototyping techniques including SLA 3D Printing, Waterjet, and Laser Cutting.</p>
+                    <p class="impact-statement"><strong>Engineering Impact:</strong> Delivered a sleek, highly tested functional prototype that directly contributed to a successful commercial launch at CES 2020.</p>
                 </div>
             </div>
         </div>
@@ -510,12 +708,12 @@
                     <img src="gokart1.jpg" alt="Go-Kart Chassis & Assembly" class="project-img" onerror="this.src='https://via.placeholder.com/450x250?text=Save+image+as+gokart1.jpg'">
                     <div class="image-overlay">Click to View Gallery</div>
                 </div>
-                <h4>High-Performance Go-Kart Chassis & Safety Design</h4>
+                <h4>Design and Fabrication of Go-Karts (GKDC, IKR)</h4>
                 <span class="tools-used">Tools: SolidWorks, ANSYS Workbench, Arc Welding</span>
-                <p>Co-led the chassis engineering department for a competitive racing team. Engineered the complete base frame and bodywork concepts in SolidWorks, validating structural integrity via ANSYS impact analysis. Fabricated the vehicle using hands-on arc welding, lathe, and milling techniques.</p>
-                <p>Designed a proprietary driver safety innovation: a rear-mounted engine fire extinguishing mechanism activated seamlessly by the driver during thermal events.</p>
+                <p>Co-led the chassis engineering department for a competitive racing team. Engineered the complete base frame and bodywork concepts, optimizing critical chassis, sprocket, and steering components for weight and cost using SolidWorks.</p>
+                <p>Facilitated vehicle assembly and testing through hands-on machine shop experience, aiding operational readiness on the track.</p>
                 <div class="impact-statement">
-                    <strong>Engineering Impact:</strong> Demonstrated full-cycle automotive design—from CAE simulation to physical welding. Awarded "Best Innovation" and "Best Autocross," securing 2nd Runners-up Nationwide.
+                    <strong>Engineering Impact:</strong> Achieved 2nd and 3rd place for 2 consecutive years in national competitions, showcasing exceptional teamwork and physical fabrication skills.
                 </div>
             </div>
 
@@ -525,11 +723,11 @@
                     <div class="image-overlay">Click to View Gallery</div>
                 </div>
                 <h4>Algorithmic Low Cycle Fatigue (LCF) Evaluation Tool</h4>
-                <span class="tools-used">Tools: Python, MATLAB, ANSYS</span>
-                <p>Bridged the gap between commercial FEA software and specialized programmatic analysis. Developed a custom Python computing architecture to parse ANSYS results and calculate the LCF life of every single node in an FEA simulation.</p>
-                <p>Successfully implemented complex mathematical models including the Coffin-Manson equation, Neuber methods for elastoplastic conversion, and the Newton-Raphson method to solve non-linear equations programmatically.</p>
+                <span class="tools-used">Tools: Python, MATLAB, ANSYS | Quest Global</span>
+                <p>Developed a functional strain-based fatigue life evaluation tool as an industrial design project using Python, resolving critical system errors during the build.</p>
+                <p>Bridged the gap between commercial software and specialized analysis by calculating the exact LCF life of every single node in an FEA simulation.</p>
                 <div class="impact-statement">
-                    <strong>Engineering Impact:</strong> Showcased advanced computational mechanics skills. I don't just rely on FEA "black boxes"—I can code the underlying physics and failure theories from first principles.
+                    <strong>Engineering Impact:</strong> Enhanced fatigue prediction accuracy by implementing Neuber and mean stress corrections alongside the Newton-Raphson iterative method into the calculation scripts.
                 </div>
             </div>
 
@@ -540,10 +738,10 @@
                 </div>
                 <h4>First-Principles Heat Conduction FEA Coding</h4>
                 <span class="tools-used">Tools: MATLAB, ANSYS Workbench</span>
-                <p>Rather than simply using commercial software, I built an FEA solver from scratch. Coded a comprehensive MATLAB program to calculate temperature and flux distribution across an isotropic chimney.</p>
-                <p>Programmed the mathematical backbone using the Gauss Quadrature Integration technique to convert physical coordinates into reference coordinates. Validated my custom code's accuracy by cross-referencing the outputs against commercial ANSYS steady-state thermal results.</p>
+                <p>Rather than simply using commercial software, I built an FEA solver from scratch. Coded a comprehensive MATLAB FEM model to calculate temperature and flux distribution across an isotropic chimney.</p>
+                <p>Programmed the mathematical backbone using the Gauss Quadrature Integration technique to convert physical coordinates into reference coordinates.</p>
                 <div class="impact-statement">
-                    <strong>Engineering Impact:</strong> Exhibited a deep, foundational mastery of Finite Element Analysis mathematics, ensuring I can critically evaluate and troubleshoot complex thermal management simulations.
+                    <strong>Engineering Impact:</strong> Exhibited a deep, foundational mastery of Finite Element Analysis mathematics, achieving < 1% error when validated against commercial ANSYS steady-state thermal results.
                 </div>
             </div>
 
@@ -554,10 +752,10 @@
                 </div>
                 <h4>Statistical Design of Experiments (DoE) Validation</h4>
                 <span class="tools-used">Tools: MINITAB, Statistical Analysis</span>
-                <p>Led a data-driven investigation to validate wearable device calorie estimations against physical gym bicycle parameters. Executed a rigorous 2^3 Full Factorial Design matrix.</p>
-                <p>Conducted advanced statistical analysis including Paired T-tests and 2-Sample T-tests to establish statistical significance. Derived a regression equation to determine the exact optimal variable settings for maximum output.</p>
+                <p>Led a data-driven investigation to validate wearable device calorie estimations against physical gym bicycle sensors. Executed a controlled, rigorous 2^3 Full Factorial Design matrix.</p>
+                <p>Conducted advanced statistical analysis, incorporating Minitab to randomize data runs and analyze collected data streams to establish statistical significance.</p>
                 <div class="impact-statement">
-                    <strong>Engineering Impact:</strong> Proved highly capable in Six Sigma/Quality Control methodologies. Ready to apply statistical rigor and Minitab analysis to optimize real-world manufacturing processes.
+                    <strong>Engineering Impact:</strong> Proved highly capable in Six Sigma and Quality Control methodologies. Ready to apply statistical rigor and Minitab analysis to optimize real-world manufacturing processes.
                 </div>
             </div>
 
@@ -604,8 +802,8 @@
                     <img src="cert_gdt_adv.jpg" alt="Advanced GD&T" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_gdt_adv.jpg'">
                     <div class="image-overlay">View Certificate</div>
                 </div>
-                <h4>Advanced GD&T</h4>
-                <span class="tools-used">Applied Geometrics, Inc. | October 2025</span>
+                <h4>Advanced GD&T ASME Y14.5 v2009</h4>
+                <span class="tools-used">Applied Geometrics, Inc. | Nov 2025</span>
                 <p>Advanced concepts and applications of Geometric Dimensioning and Tolerancing.</p>
             </div>
 
@@ -615,7 +813,7 @@
                     <div class="image-overlay">View Certificate</div>
                 </div>
                 <h4>Fundamentals of GD&T ASME Y14.5 v2018</h4>
-                <span class="tools-used">Applied Geometrics, Inc. | July 2024</span>
+                <span class="tools-used">Applied Geometrics, Inc. | Jul 2024</span>
                 <p>Completed 2.4 CEU Credit Hours covering comprehensive Geometric Dimensioning and Tolerancing standards.</p>
             </div>
 
@@ -625,8 +823,18 @@
                     <div class="image-overlay">View Certificate</div>
                 </div>
                 <h4>Six Sigma: Define and Measure</h4>
-                <span class="tools-used">TUMx (edX)</span>
+                <span class="tools-used">TUMx (edX) | Feb 2021</span>
                 <p>Professional certification covering core Six Sigma methodologies, process definition, and advanced data measurement techniques.</p>
+            </div>
+
+            <div class="grid-card">
+                <div class="image-container" onclick="openGallery('cert_stackup')">
+                    <img src="cert_stackup.jpg" alt="GD&T and Stack-Up" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_stackup.jpg'">
+                    <div class="image-overlay">View Certificate</div>
+                </div>
+                <h4>GD&T and Stack-Up</h4>
+                <span class="tools-used">Udemy | Nov 2020</span>
+                <p>Comprehensive training on Geometric Dimensioning & Tolerancing stack-up analysis for accurate manufacturing fits.</p>
             </div>
 
             <div class="grid-card">
@@ -634,7 +842,7 @@
                     <img src="cert_fmea.jpg" alt="Risk Management FMEA" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_fmea.jpg'">
                     <div class="image-overlay">View Certificate</div>
                 </div>
-                <h4>Risk Management: Master FMEA/FMECA & Criticality from A to Z</h4>
+                <h4>Risk Management: Master FMEA/FMECA & Criticality</h4>
                 <span class="tools-used">Udemy | Oct 2020</span>
                 <p>Comprehensive training on failure mode and effects analysis for robust product design.</p>
             </div>
@@ -645,7 +853,7 @@
                     <div class="image-overlay">View Certificate</div>
                 </div>
                 <h4>A Hands-on Introduction to Engineering Simulations</h4>
-                <span class="tools-used">Cornell University (edX) | July 2020</span>
+                <span class="tools-used">Cornell University (edX) | Jul 2020</span>
                 <p>Verification and Validation using Hand Calculations and Experimental Data, Mathematical Models in ANSYS Solver, Heat Transfer, and Structural Mechanics.</p>
             </div>
 
@@ -670,7 +878,7 @@
                     <div class="image-overlay">View Certificate</div>
                 </div>
                 <h4>Flow Simulation Using SolidWorks</h4>
-                <span class="tools-used">Skill Lync | July 2020</span>
+                <span class="tools-used">Skill Lync | Jul 2020</span>
                 <p>Meshing strategies, Moving Reference Frame, Flow over airfoil, and Centrifugal Pump Flow Simulation.</p>
             </div>
 
@@ -690,18 +898,8 @@
                     <div class="image-overlay">View Certificate</div>
                 </div>
                 <h4>Product Design and Analysis</h4>
-                <span class="tools-used">CADD Centre | July 2018</span>
+                <span class="tools-used">CADD Centre | Jul 2018</span>
                 <p>Upgraded and applied skills in SolidWorks, ANSYS, and GD&T.</p>
-            </div>
-
-            <div class="grid-card">
-                <div class="image-container" onclick="openGallery('cert_german')">
-                    <img src="cert_german.jpg" alt="German Level A2" class="project-img" onerror="this.src='https://via.placeholder.com/450x300?text=Save+image+as+cert_german.jpg'">
-                    <div class="image-overlay">View Certificate</div>
-                </div>
-                <h4>German Level A2</h4>
-                <span class="tools-used">Goethe-Institut e.V. | Feb 2018</span>
-                <p>Proficiency in basic German language communication and comprehension.</p>
             </div>
         </div>
     </div>
@@ -762,9 +960,9 @@
             <span class="close-resume" onclick="closeResumeModal()">&times;</span>
             <div class="resume-header">
                 <h2 style="margin: 0; color: #2c3e50;">Vishwaraj Pravin Kolge - Resume</h2>
-                <a href="resume.pdf" download="Vishwaraj_Kolge_Resume.pdf" class="btn">Download PDF</a>
+                <a href="Resume_Vishwaraj_Pravin_Kolge.pdf" download="Resume_Vishwaraj_Kolge.pdf" class="btn">Download PDF</a>
             </div>
-            <iframe src="resume.pdf" class="resume-iframe"></iframe>
+            <iframe src="Resume_Vishwaraj_Pravin_Kolge.pdf" class="resume-iframe"></iframe>
         </div>
     </div>
 
@@ -827,13 +1025,12 @@
             'cert_gdt_adv': ['cert_gdt_adv.jpg'],
             'cert_gdt_fund': ['cert_gdt_fund.jpg'],
             'cert_sixsigma': ['cert_sixsigma.jpg'],
+            'cert_stackup': ['cert_stackup.jpg'],
             'cert_fmea': ['cert_fmea.jpg'],
             'cert_sim': ['cert_sim.jpg'],
-            'cert_flow': ['cert_flow.jpg'],
             'cert_solidworks_bundle': ['cert_dyn.jpg', 'cert_fea.jpg', 'cert_sheet.jpg', 'cert_mold.jpg', 'cert_design_study.jpg'],
             'cert_matlab': ['cert_matlab.jpg'],
             'cert_product': ['cert_product.jpg'],
-            'cert_german': ['cert_german.jpg'],
             
             // Fun Galleries!
             'fun_active': ['fun_travel.jpg', 'fun_football.jpg', 'fun_yoga.jpg'],
