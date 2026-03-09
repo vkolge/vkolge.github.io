@@ -426,8 +426,10 @@
             position: relative; /* Anchor for tooltip */
             cursor: help; /* Shows the user it can be hovered */
             transition: background 0.3s ease;
+            -webkit-tap-highlight-color: transparent; /* Prevent blue flash on mobile tap */
+            outline: none;
         }
-        .skill-tag:hover {
+        .skill-tag:hover, .skill-tag.active-tooltip {
             background: var(--accent-color);
         }
 
@@ -472,16 +474,22 @@
             pointer-events: none;
         }
 
-        /* Hover Animation */
-        .skill-tag:hover::after {
+        /* Hover Animation (Desktop) & Active State (Mobile) */
+        .skill-tag:hover::after, .skill-tag.active-tooltip::after {
             opacity: 1;
             visibility: visible;
             bottom: 140%;
         }
-        .skill-tag:hover::before {
+        .skill-tag:hover::before, .skill-tag.active-tooltip::before {
             opacity: 1;
             visibility: visible;
             bottom: calc(140% - 12px);
+        }
+
+        @media (max-width: 768px) {
+            .skill-tag::after {
+                width: 220px; /* Slimmer for mobile screens to prevent edge-bleeding */
+            }
         }
         
         /* Fun Section Specifics */
@@ -581,30 +589,30 @@
 
         <div class="card">
             <h2>Core Competencies</h2>
-            <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px;"><em>Hover over any skill below to see how I have applied it in real-world engineering environments.</em></p>
+            <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px; text-align: left;"><em>Tap or hover over any skill below to see how I have applied it in real-world engineering environments.</em></p>
             <div class="skills-grid">
-                <span class="skill-tag" data-tooltip="Designed automotive heat exchangers and executed CHT analysis to identify thermal stresses at T.RAD.">Thermal Management & Heat Transfer</span>
-                <span class="skill-tag" data-tooltip="Resolved hydraulic motor field failures and evaluated system pressure drops via ANSYS Fluent.">Hydraulics & Fluid Mechanics</span>
-                <span class="skill-tag" data-tooltip="Developed custom motor variants and optimized chassis components for weight and structural integrity.">Strength of Materials & Machine Design</span>
-                <span class="skill-tag" data-tooltip="Performed thermal, vibrational, and pressure load simulations on heat exchangers to minimize verification cycle times.">FEA & CFD (ANSYS)</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Designed automotive heat exchangers and executed CHT analysis to identify thermal stresses at T.RAD.">Thermal Management & Heat Transfer</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Resolved hydraulic motor field failures and evaluated system pressure drops via ANSYS Fluent.">Hydraulics & Fluid Mechanics</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Developed custom motor variants and optimized chassis components for weight and structural integrity.">Strength of Materials & Machine Design</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Performed thermal, vibrational, and pressure load simulations on heat exchangers to minimize verification cycle times.">FEA & CFD (ANSYS)</span>
                 
-                <span class="skill-tag" data-tooltip="Delivered 6 complete automotive heat exchanger design packages adhering to phase-gate development protocols.">APQP Process</span>
-                <span class="skill-tag" data-tooltip="Optimized plastic tank snap-fit designs and engineered 100+ ABAQUS composite models for fracture research.">Simulation-Driven Design & Optimization</span>
-                <span class="skill-tag" data-tooltip="Spearheaded heat exchanger verifications and delivered functional IoT enclosure prototypes for CES 2020.">Prototype Testing & Validation</span>
-                <span class="skill-tag" data-tooltip="Spearheaded strategic design and material optimizations yielding $180K in annual cost savings.">VA/VE Analysis</span>
-                <span class="skill-tag" data-tooltip="Updated legacy hydraulic motor drawings to strict GD&T standards, eliminating production interpretation ambiguity.">ASME Y14.5 GD&T</span>
-                <span class="skill-tag" data-tooltip="Restructured bills of materials for sub-assembly insourcing and managed data via IFS ERP.">BOM Management</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Delivered 6 complete automotive heat exchanger design packages adhering to phase-gate development protocols.">APQP Process</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Optimized plastic tank snap-fit designs and engineered 100+ ABAQUS composite models for fracture research.">Simulation-Driven Design & Optimization</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Spearheaded heat exchanger verifications and delivered functional IoT enclosure prototypes for CES 2020.">Prototype Testing & Validation</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Spearheaded strategic design and material optimizations yielding $180K in annual cost savings.">VA/VE Analysis</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Updated legacy hydraulic motor drawings to strict GD&T standards, eliminating production interpretation ambiguity.">ASME Y14.5 GD&T</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Restructured bills of materials for sub-assembly insourcing and managed data via IFS ERP.">BOM Management</span>
                 
-                <span class="skill-tag" data-tooltip="Prepared 3D/2D designs in CATIA/Creo and rebuilt motor CAD models in Siemens NX for insourcing.">CAD: NX, SolidWorks, Creo & CATIA</span>
-                <span class="skill-tag" data-tooltip="Streamlined risk-based change management across platforms to achieve a 30% reduction in COGS.">PLM/ERP: Teamcenter, SAP & ProjectLibre</span>
-                <span class="skill-tag" data-tooltip="Automated FEA modeling using Python and evaluated strain-based fatigue life utilizing complex iterative math models.">Data: MATLAB, Python & Minitab</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Prepared 3D/2D designs in CATIA/Creo and rebuilt motor CAD models in Siemens NX for insourcing.">CAD: NX, SolidWorks, Creo & CATIA</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Streamlined risk-based change management across platforms to achieve a 30% reduction in COGS.">PLM/ERP: Teamcenter, SAP & ProjectLibre</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Automated FEA modeling using Python and evaluated strain-based fatigue life utilizing complex iterative math models.">Data: MATLAB, Python & Minitab</span>
                 
-                <span class="skill-tag" data-tooltip="Established internal machining processes and resolved DFM constraints for complex stamped metal parts.">Metal Forming, Stamping & Machining</span>
-                <span class="skill-tag" data-tooltip="Sourced raw motor castings and replaced screw-fastened plastic tanks with molded snap-fit designs.">Plastic Injection Molding & Casting</span>
-                <span class="skill-tag" data-tooltip="Integrated comprehensive manufacturing constraints into mass-production-ready designs across multiple OEM lines.">Surface & Heat Treatment</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Established internal machining processes and resolved DFM constraints for complex stamped metal parts.">Metal Forming, Stamping & Machining</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Sourced raw motor castings and replaced screw-fastened plastic tanks with molded snap-fit designs.">Plastic Injection Molding & Casting</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Integrated comprehensive manufacturing constraints into mass-production-ready designs across multiple OEM lines.">Surface & Heat Treatment</span>
                 
-                <span class="skill-tag" data-tooltip="Led an 8D team to isolate motor valving errors and executed 6 comprehensive DFMEA cycles to mitigate failure modes.">Failure Analysis (8D, FMEA, RCA)</span>
-                <span class="skill-tag" data-tooltip="Orchestrated global technical alignment across cross-functional teams in the USA, Japan, and India.">Project Timeline & PLM Management</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Led an 8D team to isolate motor valving errors and executed 6 comprehensive DFMEA cycles to mitigate failure modes.">Failure Analysis (8D, FMEA, RCA)</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Orchestrated global technical alignment across cross-functional teams in the USA, Japan, and India.">Project Timeline & PLM Management</span>
             </div>
         </div>
     </div>
@@ -977,6 +985,25 @@
                     n.nodeValue = n.nodeValue.replace(regex, '');
                 }
             }
+            
+            // --- Mobile Tooltip Logic ---
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach(tag => {
+                tag.addEventListener('click', function(e) {
+                    // Close all other open tooltips
+                    skillTags.forEach(t => {
+                        if (t !== this) t.classList.remove('active-tooltip');
+                    });
+                    // Toggle the clicked tooltip
+                    this.classList.toggle('active-tooltip');
+                    e.stopPropagation(); // Prevents click from immediately bubbling to document
+                });
+            });
+
+            // If the user taps anywhere else on the page, close all tooltips
+            document.addEventListener('click', function() {
+                skillTags.forEach(tag => tag.classList.remove('active-tooltip'));
+            });
         });
 
         // Navigation
