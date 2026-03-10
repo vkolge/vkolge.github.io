@@ -150,7 +150,7 @@
             margin-bottom: 25px;
         }
         
-        .hero-contact {
+                .hero-zzzzz {
             background: var(--light-bg);
             padding: 15px 20px;
             border-left: 4px solid var(--accent-color);
@@ -423,7 +423,7 @@
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
-            position: relative;
+            position: relative; /* Anchor for tooltip */
             /* CRITICAL MOBILE FIX: pointer cursor allows iOS to register clicks on spans */
             cursor: pointer; 
             transition: background 0.3s ease;
@@ -538,14 +538,6 @@
 </head>
 <body>
 
-    <script>
-        const password = prompt("This portfolio is currently under construction. Please enter the password:");
-        if (password !== "vishwarajportfolio") {
-            document.body.innerHTML = "<div style='text-align:center; padding:15%; font-family:sans-serif; color:#2c3e50;'><h2>🚧 Portfolio Under Construction 🚧</h2><p>Please check back soon!</p></div>";
-            throw new Error("Wrong password. Page stopped loading.");
-        }
-    </script>
-
     <nav>
         <div class="nav-container">
             <div class="nav-links">
@@ -569,7 +561,6 @@
                 
                 <div class="hero-contact">
                     <strong>Email:</strong> work.vkolge@gmail.com <br>
-                    <strong>Phone:</strong> +1-704-756-0205 <br>
                     <strong>Location:</strong> Clarksville, TN, USA <br>
                     <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/vk8/" target="_blank">linkedin.com/in/vk8</a>
                 </div>
@@ -618,28 +609,28 @@
             <h2>Core Competencies</h2>
             <p style="color: #666; font-size: 0.95rem; margin-bottom: 20px; text-align: left;"><em>Tap or hover over any skill below to see how I have applied it in real-world engineering environments.</em></p>
             <div class="skills-grid">
-                <span class="skill-tag" data-tooltip="Designed automotive heat exchangers and executed CHT analysis to identify thermal stresses at T.RAD.">Thermal Management & Heat Transfer</span>
-                <span class="skill-tag" data-tooltip="Resolved hydraulic motor field failures and evaluated system pressure drops via ANSYS Fluent.">Hydraulics & Fluid Mechanics</span>
-                <span class="skill-tag" data-tooltip="Developed custom motor variants and optimized chassis components for weight and structural integrity.">Strength of Materials & Machine Design</span>
-                <span class="skill-tag" data-tooltip="Performed thermal, vibrational, and pressure load simulations on heat exchangers to minimize verification cycle times.">FEA & CFD (ANSYS)</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Designed automotive heat exchangers and executed CHT analysis to identify thermal stresses at T.RAD.">Thermal Management & Heat Transfer</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Resolved hydraulic motor field failures and evaluated system pressure drops via ANSYS Fluent.">Hydraulics & Fluid Mechanics</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Developed custom motor variants and optimized chassis components for weight and structural integrity.">Strength of Materials & Machine Design</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Performed thermal, vibrational, and pressure load simulations on heat exchangers to minimize verification cycle times.">FEA & CFD (ANSYS)</span>
                 
-                <span class="skill-tag" data-tooltip="Delivered 6 complete automotive heat exchanger design packages adhering to phase-gate development protocols.">APQP Process</span>
-                <span class="skill-tag" data-tooltip="Optimized plastic tank snap-fit designs and engineered 100+ ABAQUS composite models for fracture research.">Simulation-Driven Design & Optimization</span>
-                <span class="skill-tag" data-tooltip="Spearheaded heat exchanger verifications and delivered functional IoT enclosure prototypes for CES 2020.">Prototype Testing & Validation</span>
-                <span class="skill-tag" data-tooltip="Spearheaded strategic design and material optimizations yielding $180K in annual cost savings.">VA/VE Analysis</span>
-                <span class="skill-tag" data-tooltip="Updated legacy hydraulic motor drawings to strict GD&T standards, eliminating production interpretation ambiguity.">ASME Y14.5 GD&T</span>
-                <span class="skill-tag" data-tooltip="Restructured bills of materials for sub-assembly insourcing and managed data via IFS ERP.">BOM Management</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Delivered 6 complete automotive heat exchanger design packages adhering to phase-gate development protocols.">APQP Process</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Optimized plastic tank snap-fit designs and engineered 100+ ABAQUS composite models for fracture research.">Simulation-Driven Design & Optimization</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Spearheaded heat exchanger verifications and delivered functional IoT enclosure prototypes for CES 2020.">Prototype Testing & Validation</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Spearheaded strategic design and material optimizations yielding $180K in annual cost savings.">VA/VE Analysis</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Updated legacy hydraulic motor drawings to strict GD&T standards, eliminating production interpretation ambiguity.">ASME Y14.5 GD&T</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Restructured bills of materials for sub-assembly insourcing and managed data via IFS ERP.">BOM Management</span>
                 
-                <span class="skill-tag" data-tooltip="Prepared 3D/2D designs in CATIA/Creo and rebuilt motor CAD models in Siemens NX for insourcing.">CAD: NX, SolidWorks, Creo & CATIA</span>
-                <span class="skill-tag" data-tooltip="Streamlined risk-based change management across platforms to achieve a 30% reduction in COGS.">PLM/ERP: Teamcenter, SAP & ProjectLibre</span>
-                <span class="skill-tag" data-tooltip="Automated FEA modeling using Python and evaluated strain-based fatigue life utilizing complex iterative math models.">Data: MATLAB, Python & Minitab</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Prepared 3D/2D designs in CATIA/Creo and rebuilt motor CAD models in Siemens NX for insourcing.">CAD: NX, SolidWorks, Creo & CATIA</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Streamlined risk-based change management across platforms to achieve a 30% reduction in COGS.">PLM/ERP: Teamcenter, SAP & ProjectLibre</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Automated FEA modeling using Python and evaluated strain-based fatigue life utilizing complex iterative math models.">Data: MATLAB, Python & Minitab</span>
                 
-                <span class="skill-tag" data-tooltip="Established internal machining processes and resolved DFM constraints for complex stamped metal parts.">Metal Forming, Stamping & Machining</span>
-                <span class="skill-tag" data-tooltip="Sourced raw motor castings and replaced screw-fastened plastic tanks with molded snap-fit designs.">Plastic Injection Molding & Casting</span>
-                <span class="skill-tag" data-tooltip="Integrated comprehensive manufacturing constraints into mass-production-ready designs across multiple OEM lines.">Surface & Heat Treatment</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Established internal machining processes and resolved DFM constraints for complex stamped metal parts.">Metal Forming, Stamping & Machining</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Sourced raw motor castings and replaced screw-fastened plastic tanks with molded snap-fit designs.">Plastic Injection Molding & Casting</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Integrated comprehensive manufacturing constraints into mass-production-ready designs across multiple OEM lines.">Surface & Heat Treatment</span>
                 
-                <span class="skill-tag" data-tooltip="Led an 8D team to isolate motor valving errors and executed 6 comprehensive DFMEA cycles to mitigate failure modes.">Failure Analysis (8D, FMEA, RCA)</span>
-                <span class="skill-tag" data-tooltip="Orchestrated global technical alignment across cross-functional teams in the USA, Japan, and India.">Project Timeline & PLM Management</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Led an 8D team to isolate motor valving errors and executed 6 comprehensive DFMEA cycles to mitigate failure modes.">Failure Analysis (8D, FMEA, RCA)</span>
+                <span class="skill-tag" tabindex="0" data-tooltip="Orchestrated global technical alignment across cross-functional teams in the USA, Japan, and India.">Project Timeline & PLM Management</span>
             </div>
         </div>
     </div>
